@@ -65,7 +65,6 @@ export default function HorizontalWork({
         if (totalWidth <= 0) return;
 
         gsap.set(scroller, { x: 0 });
-
         ScrollTrigger.getAll().forEach((t) => t.kill());
 
         gsap.to(scroller, {
@@ -103,77 +102,93 @@ export default function HorizontalWork({
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
     e.currentTarget.style.setProperty("--x", `${x}px`);
     e.currentTarget.style.setProperty("--y", `${y}px`);
   };
 
   return (
-    <section ref={wrapRef} className="relative bg-black text-white">
-      <div className="mx-auto w-[min(1100px,92%)] pt-8 pb-8">
-        <p className="text-xs uppercase tracking-[0.3em] text-white/45">
-          Projekti
-        </p>
+    <section ref={wrapRef} className="relative bg-black text-white overflow-x-hidden">
+      <div className="container-main pt-8 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/45">
+              Projekti
+            </p>
+            <h2 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight">
+              Odabrani projekti
+            </h2>
+            <p className="mt-4 max-w-2xl text-white/60">
+              Skrolaj dolje — projekti se pomiču horizontalno.
+            </p>
+          </div>
 
-        <h2 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight">
-          Odabrani projekti
-        </h2>
-
-        <p className="mt-4 max-w-2xl text-white/60">
-          Skrolaj dolje — projekti se pomiču horizontalno.
-        </p>
+          <div className="hidden md:block w-[220px]">
+            <div className="h-[2px] overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full bg-white/45"
+                style={{ width: `${Math.round(progress * 100)}%` }}
+              />
+            </div>
+            <p className="mt-2 text-right text-xs text-white/45">
+              {Math.round(progress * 100)}%
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div className="h-scroll flex gap-8 px-[4vw] pb-14">
-        {list.map((p) => (
+      <div className="h-scroll flex gap-5 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-[4vw] pb-14">
+        {list.map((p, i) => (
           <Tilt
             key={p.slug}
-            tiltMaxAngleX={10}
-            tiltMaxAngleY={10}
+            tiltMaxAngleX={8}
+            tiltMaxAngleY={8}
             glareEnable
-            glareMaxOpacity={0.18}
+            glareMaxOpacity={0.14}
             glareColor="white"
             glarePosition="all"
-            scale={1.02}
+            scale={1.01}
             transitionSpeed={900}
-            className="min-w-[82vw] md:min-w-[52vw]"
+            className="min-w-[88vw] sm:min-w-[82vw] md:min-w-[52vw]"
           >
             <Link
               href={`/work/${p.slug}`}
               onMouseMove={handleGlowMove}
               className="work-card card-ui card-glow group relative block overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
             >
-              <div className="relative h-[66vh] w-full">
+              <div className="relative h-[52vh] sm:h-[60vh] md:h-[66vh] w-full">
                 <Image
                   src={p.image}
                   alt={p.title}
                   fill
+                  sizes="(max-width: 768px) 88vw, (max-width: 1024px) 82vw, 52vw"
                   className="work-card-media object-cover"
+                  priority={i === 0}
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-
                 <div className="work-card-overlay absolute inset-0 opacity-0 bg-gradient-to-br from-white/18 to-transparent" />
 
-                <div className="absolute left-6 top-6">
-                  <span className="inline-flex items-center rounded-full border border-white/15 bg-black/30 px-4 py-2 text-xs uppercase tracking-[0.28em] text-white/75 backdrop-blur-xl">
+                <div className="absolute left-4 sm:left-6 top-4 sm:top-6">
+                  <span className="inline-flex items-center rounded-full border border-white/15 bg-black/30 px-4 py-2 text-[10px] sm:text-xs uppercase tracking-[0.28em] text-white/75 backdrop-blur-xl">
                     {p.badge}
                   </span>
                 </div>
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
-                <p className="text-xs uppercase tracking-[0.3em] text-white/65">
+              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-10">
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/65">
                   {p.tag}
                 </p>
 
-                <h3 className="work-card-title mt-3 text-3xl md:text-4xl font-semibold">
+                <h3 className="work-card-title mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight">
                   {p.title}
                 </h3>
 
-                <p className="work-card-note mt-3 text-white/60">{p.note}</p>
+                <p className="work-card-note mt-3 text-sm sm:text-base text-white/60">
+                  {p.note}
+                </p>
 
-                <div className="mt-7 inline-flex items-center gap-2 text-sm text-white/80">
+                <div className="mt-6 sm:mt-7 inline-flex items-center gap-2 text-sm text-white/80">
                   <span>Pogledaj projekt</span>
                   <span className="work-card-arrow">→</span>
                 </div>
@@ -183,7 +198,7 @@ export default function HorizontalWork({
         ))}
       </div>
 
-      <div className="h-[22vh]" />
+      <div className="h-[10vh] md:h-[22vh]" />
     </section>
   );
 }

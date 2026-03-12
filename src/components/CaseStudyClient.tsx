@@ -113,7 +113,7 @@ export default function CaseStudyClient({
             k: "Rezultat",
             title: "Veća učinkovitost",
             text: "Stranica jasnije vodi korisnika prema upitu, rezervaciji ili kupnji.",
-            image: project.image,
+            image: p1.png.image,
           },
         ];
 
@@ -348,3 +348,4 @@ function formatSlug(slug: string) {
   if (slug === "startup-landing") return "landing stranica za startup";
   return slug.replaceAll("-", " ");
 }
+

@@ -55,9 +55,9 @@ export default function Hero() {
           Premium web stranice koje{" "}
           <span className="relative inline-block">
             <span className="absolute -inset-2 rounded-2xl bg-white/5 blur-xl" />
-            <span className="relative">izgledaju vrhunski</span>
+            <span className="relative"> donose</span>
           </span>{" "}
-          i donose klijente.
+           klijente.
         </h1>
 
         <p className="mt-6 max-w-2xl text-white/60 text-lg leading-relaxed">
@@ -99,3 +99,4 @@ function Stat({ k, v }: { k: string; v: string }) {
   );
 
 }
+

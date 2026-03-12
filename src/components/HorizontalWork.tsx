@@ -14,7 +14,7 @@ const projects = [
     title: "Platforma za naručivanje hrane",
     tag: "Web + SEO",
     note: "Jednostavno online naručivanje za restorane i dostavu.",
-    image: "/p1.png",
+    image: "p1.png",
     slug: "restaurant-platform",
     badge: "Studija projekta",
   },
@@ -22,7 +22,7 @@ const projects = [
     title: "Vile i apartmani",
     tag: "UX / Rezervacije",
     note: "Profesionalna prezentacija smještaja i jednostavan booking sustav.",
-    image: "/p2.png",
+    image: "p2.png",
     slug: "hotel-booking-ui",
     badge: "Rezervacije",
   },
@@ -30,7 +30,7 @@ const projects = [
     title: "Premium vizualni sustav",
     tag: "Dizajn + Animacija",
     note: "Moderan vizualni identitet i luksuzan dojam brenda.",
-    image: "/p3.png",
+    image: "p3.png",
     slug: "luxury-brand-site",
     badge: "Vizualni identitet",
   },
@@ -38,7 +38,7 @@ const projects = [
     title: "Landing stranica za startup",
     tag: "Web + Prodaja",
     note: "Stranica optimizirana za prijave korisnika i veću konverziju.",
-    image: "/p4.png",
+    image: "p4.png",
     slug: "startup-landing",
     badge: "Konverzije",
   },
@@ -202,4 +202,5 @@ export default function HorizontalWork({
     </section>
   );
 }
+
 

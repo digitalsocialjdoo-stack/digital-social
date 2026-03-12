@@ -47,32 +47,17 @@ export default function CaseStudyClient({
 
       gsap.fromTo(
         items,
-        { y: 22, opacity: 0, filter: "blur(10px)" },
+        { y: 30, opacity: 0, filter: "blur(12px)" },
         {
           y: 0,
           opacity: 1,
           filter: "blur(0px)",
-          duration: 0.85,
+          duration: 1,
           ease: "power3.out",
-          stagger: 0.08,
+          stagger: 0.1,
           scrollTrigger: {
             trigger: root,
             start: "top 75%",
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".hero-img",
-        { scale: 1.06, opacity: 0.9 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".hero-img",
-            start: "top 80%",
           },
         }
       );
@@ -132,42 +117,56 @@ export default function CaseStudyClient({
           },
         ];
 
+  const handleGlowMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--x", `${x}px`);
+    e.currentTarget.style.setProperty("--y", `${y}px`);
+  };
+
   return (
-    <div ref={rootRef} className="mx-auto w-[min(1100px,92%)]">
-      <div className="flex items-center justify-between">
-        <BackButton fallback="/work" label="Nazad" />
+    <div ref={rootRef} className="container-main pt-24 md:pt-28">
+      <div className="flex items-center justify-between gap-4">
+        <BackButton fallback="/work" />
         <span className="text-xs uppercase tracking-[0.28em] text-white/40">
           Projekt
         </span>
       </div>
 
-      <div className="mt-10 grid items-start gap-10 lg:grid-cols-12">
+      <div className="mt-10 grid lg:grid-cols-12 gap-8 md:gap-10 items-start">
         <div className="lg:col-span-7">
-          <h1 className="reveal text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">
+          <h1 className="reveal text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.02]">
             {project.title}
           </h1>
 
-          <p className="reveal mt-5 text-lg leading-relaxed text-white/60">
+          <p className="reveal mt-5 text-white/60 text-base md:text-lg leading-relaxed">
             {project.subtitle}
           </p>
 
-          <div className="reveal card-ui mt-10 rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-xl">
+          <div
+            onMouseMove={handleGlowMove}
+            className="reveal card-ui card-glow mt-8 md:mt-10 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 sm:p-6 md:p-7"
+          >
             <p className="text-xs uppercase tracking-[0.3em] text-white/45">
               Pregled
             </p>
-            <p className="mt-3 leading-relaxed text-white/70">{overviewText}</p>
+            <p className="mt-3 text-white/70 leading-relaxed">{overviewText}</p>
           </div>
 
           <Link
             href="/contact"
-            className="reveal button-ui mt-10 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-black transition hover:opacity-90"
+            className="reveal button-ui inline-flex mt-8 md:mt-10 items-center gap-2 rounded-full bg-white text-black px-6 py-3 font-semibold hover:opacity-90 transition"
           >
             Započni projekt →
           </Link>
         </div>
 
-        <aside className="space-y-6 lg:col-span-5 lg:sticky lg:top-24">
-          <div className="hero-img card-ui relative overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+        <aside className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
+          <div
+            onMouseMove={handleGlowMove}
+            className="hero-img card-ui card-glow relative overflow-hidden rounded-3xl border border-white/10 bg-white/5"
+          >
             <div className="relative aspect-[4/3] w-full">
               <Image
                 src={project.image}
@@ -180,7 +179,10 @@ export default function CaseStudyClient({
             </div>
           </div>
 
-          <div className="reveal card-ui rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <div
+            onMouseMove={handleGlowMove}
+            className="reveal card-ui card-glow rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6"
+          >
             <p className="text-xs uppercase tracking-[0.3em] text-white/45">
               Tehnologija
             </p>
@@ -188,7 +190,7 @@ export default function CaseStudyClient({
               {project.stack.map((s) => (
                 <span
                   key={s}
-                  className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/80"
+                  className="text-sm rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white/80"
                 >
                   {s}
                 </span>
@@ -196,7 +198,10 @@ export default function CaseStudyClient({
             </div>
           </div>
 
-          <div className="reveal card-ui rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <div
+            onMouseMove={handleGlowMove}
+            className="reveal card-ui card-glow rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6"
+          >
             <p className="text-xs uppercase tracking-[0.3em] text-white/45">
               Rezultati
             </p>
@@ -210,20 +215,20 @@ export default function CaseStudyClient({
       </div>
 
       <div className="mt-14">
-        <div className="reveal flex items-end justify-between gap-6">
+        <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-white/45">
               Priča projekta
             </p>
-            <h3 className="mt-3 text-2xl font-semibold md:text-3xl">
+            <h3 className="mt-3 text-2xl md:text-3xl font-semibold">
               Istraži projekt →
             </h3>
-            <p className="mt-3 max-w-xl text-white/55">
+            <p className="mt-3 text-white/55 max-w-xl">
               Istraži ključne dijelove dizajna i korisničkog iskustva.
             </p>
           </div>
 
-          <p className="hidden text-sm text-white/50 md:block">
+          <p className="hidden md:block text-sm text-white/50">
             Pomak mišem = pregled projekta
           </p>
         </div>
@@ -239,21 +244,23 @@ export default function CaseStudyClient({
               title={item.title}
               text={item.text}
               image={item.image || project.image}
+              onMouseMove={handleGlowMove}
             />
           ))}
         </div>
       </div>
 
-      <div className="mt-14 grid gap-6 pb-10 md:grid-cols-2">
+      <div className="mt-14 pb-10 grid md:grid-cols-2 gap-6">
         {prevSlug ? (
           <Link
             href={`/work/${prevSlug}`}
-            className="reveal card-ui group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+            onMouseMove={handleGlowMove}
+            className="reveal card-ui card-glow group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition"
           >
             <p className="text-xs uppercase tracking-[0.3em] text-white/45">
               Prethodni projekt
             </p>
-            <p className="mt-3 text-2xl font-semibold text-white/90 group-hover:text-white">
+            <p className="mt-3 text-xl md:text-2xl font-semibold text-white/90 group-hover:text-white">
               ← {formatSlug(prevSlug)}
             </p>
             <div className="mt-6 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
@@ -268,12 +275,13 @@ export default function CaseStudyClient({
         {nextSlug ? (
           <Link
             href={`/work/${nextSlug}`}
-            className="reveal card-ui group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+            onMouseMove={handleGlowMove}
+            className="reveal card-ui card-glow group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition"
           >
             <p className="text-xs uppercase tracking-[0.3em] text-white/45">
               Sljedeći projekt
             </p>
-            <p className="mt-3 text-2xl font-semibold text-white/90 group-hover:text-white">
+            <p className="mt-3 text-xl md:text-2xl font-semibold text-white/90 group-hover:text-white">
               {formatSlug(nextSlug)} →
             </p>
             <div className="mt-6 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
@@ -286,8 +294,8 @@ export default function CaseStudyClient({
         )}
       </div>
 
-      <div className="flex justify-center pb-20">
-        <BackButton fallback="/work" label="Nazad" />
+      <div className="pb-20 flex justify-center">
+        <BackButton fallback="/work" />
       </div>
     </div>
   );
@@ -298,18 +306,23 @@ function StoryShot({
   title,
   text,
   image,
+  onMouseMove,
 }: {
   k: string;
   title: string;
   text: string;
   image: string;
+  onMouseMove: (e: React.MouseEvent<HTMLElement>) => void;
 }) {
   return (
-    <div className="card-ui card-glow min-w-[78vw] overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl md:min-w-[44vw]">
-      <div className="relative h-[340px] md:h-[380px]">
+    <div
+      onMouseMove={onMouseMove}
+      className="card-ui card-glow min-w-[86vw] sm:min-w-[78vw] md:min-w-[44vw] overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
+    >
+      <div className="relative h-[260px] sm:h-[320px] md:h-[380px]">
         <Image src={image} alt={title} fill className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(800px_circle_at_20%_10%,rgba(255,255,255,0.12),transparent_60%)] opacity-50" />
+        <div className="absolute inset-0 opacity-50 bg-[radial-gradient(800px_circle_at_20%_10%,rgba(255,255,255,0.12),transparent_60%)]" />
 
         <div className="absolute left-6 top-6">
           <span className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.28em] text-white/70">
@@ -317,8 +330,8 @@ function StoryShot({
           </span>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-7">
-          <h4 className="text-2xl font-semibold leading-tight md:text-3xl">
+        <div className="absolute left-0 right-0 bottom-0 p-5 sm:p-6 md:p-7">
+          <h4 className="text-2xl md:text-3xl font-semibold leading-tight">
             {title}
           </h4>
           <p className="mt-2 text-sm text-white/60">{text}</p>

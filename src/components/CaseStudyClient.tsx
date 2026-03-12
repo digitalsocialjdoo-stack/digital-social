@@ -26,6 +26,20 @@ type Project = {
   story?: StoryItem[];
 };
 
+function normalizeImagePath(image?: string) {
+  if (!image) return "/p1.png";
+
+  if (image.startsWith("/work/")) {
+    return image.replace("/work/", "/");
+  }
+
+  if (!image.startsWith("/")) {
+    return `/${image}`;
+  }
+
+  return image;
+}
+
 export default function CaseStudyClient({
   project,
   prevSlug,
@@ -87,6 +101,8 @@ export default function CaseStudyClient({
     project.overview ||
     "Ovaj projekt fokusiran je na jasno korisničko iskustvo, moderan dizajn i bolju prezentaciju usluge. Cilj je bio stvoriti bržu, pregledniju i učinkovitiju stranicu koja korisnika lakše vodi do željene radnje.";
 
+  const mainImage = normalizeImagePath(project.image);
+
   const storyItems =
     project.story && project.story.length > 0
       ? project.story
@@ -95,25 +111,25 @@ export default function CaseStudyClient({
             k: "Projekt",
             title: "Jasna struktura",
             text: "Sadržaj je organiziran tako da korisnik lakše dolazi do informacija.",
-            image: project.image,
+            image: mainImage,
           },
           {
             k: "UX",
             title: "Bolje iskustvo",
             text: "Moderniji raspored elemenata i jednostavnije korištenje stranice.",
-            image: project.image,
+            image: mainImage,
           },
           {
             k: "Dizajn",
             title: "Snažniji dojam",
             text: "Vizualni identitet podiže profesionalnost i vrijednost brenda.",
-            image: project.image,
+            image: mainImage,
           },
           {
             k: "Rezultat",
             title: "Veća učinkovitost",
             text: "Stranica jasnije vodi korisnika prema upitu, rezervaciji ili kupnji.",
-            image: p1.png.image,
+            image: mainImage,
           },
         ];
 
@@ -169,7 +185,7 @@ export default function CaseStudyClient({
           >
             <div className="relative aspect-[4/3] w-full">
               <Image
-                src={project.image}
+                src={mainImage}
                 alt={project.title}
                 fill
                 className="object-cover"
@@ -243,7 +259,7 @@ export default function CaseStudyClient({
               k={item.k}
               title={item.title}
               text={item.text}
-              image={item.image || project.image}
+              image={normalizeImagePath(item.image || mainImage)}
               onMouseMove={handleGlowMove}
             />
           ))}
@@ -348,4 +364,3 @@ function formatSlug(slug: string) {
   if (slug === "startup-landing") return "landing stranica za startup";
   return slug.replaceAll("-", " ");
 }
-

@@ -102,10 +102,126 @@ export default function CaseStudyClient({
     "Ovaj projekt fokusiran je na jasno korisničko iskustvo, moderan dizajn i bolju prezentaciju usluge. Cilj je bio stvoriti bržu, pregledniju i učinkovitiju stranicu koja korisnika lakše vodi do željene radnje.";
 
   const mainImage = normalizeImagePath(project.image);
+  const projectTitle = project.title.toLowerCase();
 
   const storyItems =
     project.story && project.story.length > 0
       ? project.story
+      : projectTitle.includes("naručivanje hrane") ||
+        projectTitle.includes("restaurant") ||
+        projectTitle.includes("restoran")
+      ? [
+          {
+            k: "Meni",
+            title: "Pregled kategorija",
+            text: "Korisnik odmah vidi glavne kategorije hrane i može brzo pronaći željeno jelo.",
+            image: "/restaurant-story-1.png",
+          },
+          {
+            k: "Popularno",
+            title: "Istaknuta jela",
+            text: "Najpopularniji proizvodi prikazani su jasno i vizualno atraktivno.",
+            image: "/restaurant-story-2.png",
+          },
+          {
+            k: "Narudžba",
+            title: "Brza kupnja",
+            text: "Proces naručivanja pojednostavljen je kako bi korisnik brzo završio narudžbu.",
+            image: "/restaurant-story-3.png",
+          },
+          {
+            k: "Rezultat",
+            title: "Jednostavno naručivanje",
+            text: "UX vodi korisnika od pregleda menija do završetka narudžbe.",
+            image: "/restaurant-story-4.png",
+          },
+        ]
+      : projectTitle.includes("hotel") ||
+        projectTitle.includes("vile") ||
+        projectTitle.includes("apartmani")
+      ? [
+          {
+            k: "Rezervacije",
+            title: "Jednostavan booking",
+            text: "Posjetitelj može brzo pronaći smještaj i rezervirati termin.",
+            image: "/hotel-story-1.png",
+          },
+          {
+            k: "Smještaj",
+            title: "Pregled soba",
+            text: "Smještaj je prikazan kroz jasne kartice sa slikama i osnovnim informacijama.",
+            image: "/hotel-story-2.png",
+          },
+          {
+            k: "UX",
+            title: "Brza navigacija",
+            text: "Struktura stranice omogućava lako pronalaženje ponude i detalja.",
+            image: "/hotel-story-3.png",
+          },
+          {
+            k: "Rezultat",
+            title: "Veća konverzija",
+            text: "Moderni booking UX povećava broj upita i rezervacija.",
+            image: "/hotel-story-4.png",
+          },
+        ]
+      : projectTitle.includes("premium") ||
+        projectTitle.includes("vizualni") ||
+        projectTitle.includes("brand")
+      ? [
+          {
+            k: "Brand",
+            title: "Vizualni identitet",
+            text: "Premium vizualni sustav pojačava vrijednost brenda i čini ga prepoznatljivijim.",
+            image: "/brand-story-1.png",
+          },
+          {
+            k: "Dizajn",
+            title: "Elegantna tipografija",
+            text: "Tipografija i raspored sekcija stvaraju luksuzan i moderan dojam.",
+            image: "/brand-story-2.png",
+          },
+          {
+            k: "Detalji",
+            title: "Minimalizam",
+            text: "Minimalistički dizajn fokusira korisnika na sadržaj i jača premium osjećaj.",
+            image: "/brand-story-3.png",
+          },
+          {
+            k: "Rezultat",
+            title: "Premium dojam",
+            text: "Konačni vizual ostavlja snažan profesionalni i luksuzan utisak.",
+            image: "/brand-story-4.png",
+          },
+        ]
+      : projectTitle.includes("startup") ||
+        projectTitle.includes("landing")
+      ? [
+          {
+            k: "Landing",
+            title: "Jasan hero",
+            text: "Hero sekcija odmah objašnjava proizvod, vrijednost i glavni CTA.",
+            image: "/startup-story-1.png",
+          },
+          {
+            k: "Feature",
+            title: "Prednosti proizvoda",
+            text: "Ključne funkcije predstavljene su jasno, kratko i vizualno pregledno.",
+            image: "/startup-story-2.png",
+          },
+          {
+            k: "UX",
+            title: "Brza navigacija",
+            text: "Korisnik brzo dolazi do glavne akcije bez lutanja kroz sadržaj.",
+            image: "/startup-story-3.png",
+          },
+          {
+            k: "Rezultat",
+            title: "Veća konverzija",
+            text: "Landing struktura optimizirana je za prijave korisnika i upite.",
+            image: "/startup-story-4.png",
+          },
+        ]
       : [
           {
             k: "Projekt",

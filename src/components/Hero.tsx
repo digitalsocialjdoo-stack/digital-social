@@ -61,7 +61,7 @@ export default function Hero() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-white/60 text-lg leading-relaxed">
-          Izrađujem web stranice u rangu velikih brendova: vrhunske animacije, brzina i SEO koji dovodi klijente.
+          Izrađujem web stranice u rangu velikih brendova, vrhunske animacije, brzina i SEO koji dovodi klijente.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -99,4 +99,5 @@ function Stat({ k, v }: { k: string; v: string }) {
   );
 
 }
+
 

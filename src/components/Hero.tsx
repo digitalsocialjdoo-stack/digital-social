@@ -84,12 +84,7 @@ export default function Hero() {
           </Link>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
-          <Stat k="Brza stranica" v="Stranica se učitava za manje od 1 sekunde" />
-          <Stat k="Učitavanje < 1s" v="Posjetitelji ne čekaju — sve radi odmah" />
-          <Stat k="Više posjetitelja" v="SEO optimizacija za Google" />
-          <Stat k="Više posjetitelja" v="Premium izgled i animacije" />
-        </div>
+        
       </div>
     </section>
   );
@@ -102,4 +97,5 @@ function Stat({ k, v }: { k: string; v: string }) {
       <div className="mt-1 text-sm text-white/55">{v}</div>
     </div>
   );
+
 }

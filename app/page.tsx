@@ -4,29 +4,8 @@ import Footer from "../src/components/Footer";
 
 export default function Home() {
   return (
-    <main className="bg-black text-white overflow-x-hidden">
+    <main className="bg-black text-white overflow-x-hidden pb-28 md:pb-0">
       <Hero />
-
-      <section className="container-main pt-10 pb-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard
-            title="Brza stranica"
-            text="Brzo učitavanje i bolje korisničko iskustvo."
-          />
-          <StatCard
-            title="Više upita"
-            text="Jasna struktura koja vodi korisnika prema kontaktu."
-          />
-          <StatCard
-            title="Moderan dizajn"
-            text="Premium izgled prilagođen brendu i publici."
-          />
-          <StatCard
-            title="SEO osnova"
-            text="Bolja vidljivost na Googleu i lokalnim pretragama."
-          />
-        </div>
-      </section>
 
       <HorizontalWork variant="home" />
 
@@ -65,20 +44,5 @@ export default function Home() {
 
       <Footer />
     </main>
-  );
-}
-
-function StatCard({
-  title,
-  text,
-}: {
-  title: string;
-  text: string;
-}) {
-  return (
-    <div className="card-ui card-glow rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5">
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="mt-2 text-sm text-white/60">{text}</p>
-    </div>
   );
 }
